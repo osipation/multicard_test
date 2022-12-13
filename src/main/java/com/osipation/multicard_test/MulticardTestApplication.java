@@ -1,0 +1,13 @@
+package com.osipation.multicard_test;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MulticardTestApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(MulticardTestApplication.class, args);
+	}
+
+}
