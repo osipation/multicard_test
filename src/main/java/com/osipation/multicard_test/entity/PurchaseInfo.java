@@ -42,4 +42,8 @@ public class PurchaseInfo implements Serializable {
 
     @Column(name = "purchase_date")
     private Date purchaseDate;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User userId;
 }
