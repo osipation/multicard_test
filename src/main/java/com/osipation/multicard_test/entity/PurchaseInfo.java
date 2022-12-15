@@ -1,13 +1,12 @@
 package com.osipation.multicard_test.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -16,6 +15,7 @@ import java.util.Date;
 @Builder
 @Entity
 @Table(name = "purchase_info")
+@XmlRootElement
 public class PurchaseInfo implements Serializable {
 
     @Id
@@ -24,7 +24,7 @@ public class PurchaseInfo implements Serializable {
     private int id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "purchase_item", referencedColumnName = "id")
+    @JoinColumn(name = "purchase_item")
     private Purchase purchaseItem;
 
     @Column(name = "count")
@@ -34,9 +34,9 @@ public class PurchaseInfo implements Serializable {
     private BigDecimal amount;
 
     @Column(name = "purchase_date")
-    private Date purchaseDate;
+    private LocalDate purchaseDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private User userId;
 }

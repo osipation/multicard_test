@@ -1,13 +1,10 @@
 package com.osipation.multicard_test.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,6 +23,7 @@ public class User  implements Serializable {
     private String username;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     @Column(name = "name")
@@ -39,8 +37,4 @@ public class User  implements Serializable {
 
     @Column(name = "enabled")
     private boolean enabled;
-
-//    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL)
-//    private List<PurchaseInfo> purchaseInfos;
 }

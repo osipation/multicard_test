@@ -10,7 +10,7 @@ CREATE TABLE "purchase_info" (
 	"purchase_item" int not null,
 	"count" int not null,
 	"amount" numeric not null check (amount > 0),
-	"purchase_date" timestamp not null,
+	"purchase_date" date not null,
 	"user_id" int not null,
     CONSTRAINT "pk_purchase_info_id" PRIMARY KEY(id),
 	CONSTRAINT "fk_purchase_info_purchase_item_id" FOREIGN KEY("purchase_item")

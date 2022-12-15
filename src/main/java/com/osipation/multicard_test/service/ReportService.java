@@ -9,7 +9,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReportService {
@@ -29,8 +31,8 @@ public class ReportService {
 
         User currentUser = userRepository.findByUsername(currentPrincipalName);
 
-
-        return purchaseInfoRepository.findAllByUserId(currentUser.getId());
+        LocalDate dateWeekAgo = LocalDate.now().minusDays(7);
+        return purchaseInfoRepository.findAllByUserId(currentUser).stream().filter(p -> p.getPurchaseDate().isAfter(dateWeekAgo)).collect(Collectors.toList());
     }
 
 }
