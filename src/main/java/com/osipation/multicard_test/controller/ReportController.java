@@ -37,4 +37,10 @@ public class ReportController {
         return itemOptional.map(purchaseItem -> new ResponseEntity<>(purchaseItem, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
+
+    @GetMapping("/popular/user/half-year")
+    public ResponseEntity<String> getUserWithMostPurchasesForHalfYear() {
+        String response = reportService.getUserWithMostPurchasesForHalfYear();
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
 }

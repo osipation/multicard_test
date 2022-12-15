@@ -4,7 +4,7 @@ import com.osipation.multicard_test.entity.PurchaseItem;
 import com.osipation.multicard_test.entity.PurchaseInfo;
 import com.osipation.multicard_test.entity.User;
 import com.osipation.multicard_test.repository.PurchaseInfoRepository;
-import com.osipation.multicard_test.repository.PurchaseRepository;
+import com.osipation.multicard_test.repository.PurchaseItemRepository;
 import com.osipation.multicard_test.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,15 +21,15 @@ public class ReportService {
 
     private final PurchaseInfoRepository purchaseInfoRepository;
     private final UserRepository userRepository;
-    private final PurchaseRepository purchaseRepository;
+    private final PurchaseItemRepository purchaseItemRepository;
 
 
     @Autowired
     public ReportService(PurchaseInfoRepository purchaseInfoRepository, UserRepository userRepository,
-                         PurchaseRepository purchaseRepository) {
+                         PurchaseItemRepository purchaseItemRepository) {
         this.purchaseInfoRepository = purchaseInfoRepository;
         this.userRepository = userRepository;
-        this.purchaseRepository = purchaseRepository;
+        this.purchaseItemRepository = purchaseItemRepository;
     }
 
     public List<PurchaseInfo> getPurchasesForLastWeek() {
@@ -46,6 +46,13 @@ public class ReportService {
 
     public Optional<PurchaseItem> getMostPopularPurchaseItemForLastMonth() {
         Integer itemId = purchaseInfoRepository.findMostPopularItemIdForMonth();
-        return purchaseRepository.findById(itemId);
+        return purchaseItemRepository.findById(itemId);
+    }
+
+    public String getUserWithMostPurchasesForHalfYear() {
+        Integer userId = purchaseInfoRepository.findMostPopularUserIdForHalfYear();
+        Optional<User> userOptional = userRepository.findById(userId);
+        return userOptional.map(user -> user.getName() + " " + user.getLastname())
+                .orElse("Такого пользователя нет");
     }
 }
