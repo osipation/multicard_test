@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class User  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "username")
     private String username;
@@ -38,4 +39,8 @@ public class User  implements Serializable {
 
     @Column(name = "enabled")
     private boolean enabled;
+
+//    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL)
+//    private List<PurchaseInfo> purchaseInfos;
 }

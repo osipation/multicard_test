@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,4 +25,11 @@ public class Purchase implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "cost")
+    private BigDecimal cost;
+
+//    @OneToMany(mappedBy = "purchaseItem", fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL)
+//    private List<PurchaseInfo> purchaseInfos;
 }

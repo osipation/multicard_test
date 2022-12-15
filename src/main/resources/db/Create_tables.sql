@@ -1,14 +1,12 @@
 CREATE TABLE "purchases" (
     "id" int,
     "name" text not null,
+    "cost" numeric not null,
     CONSTRAINT "pk_purchase_id" PRIMARY KEY(id)
 );
 
 CREATE TABLE "purchase_info" (
     "id" int,
-    "name" text not null,
-	"lastname" text not null,
-	"age" int,
 	"purchase_item" int not null,
 	"count" int not null,
 	"amount" numeric not null check (amount > 0),

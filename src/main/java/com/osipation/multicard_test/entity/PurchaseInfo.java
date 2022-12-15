@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -22,23 +23,15 @@ public class PurchaseInfo implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "lastname")
-    private String lastname;
-
-    @Column(name = "age")
-    private int age;
-
-    @Column(name = "purchase_item")
-    private int purchaseItem;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "purchase_item", referencedColumnName = "id")
+    private Purchase purchaseItem;
 
     @Column(name = "count")
     private int count;
 
     @Column(name = "amount")
-    private int amount;
+    private BigDecimal amount;
 
     @Column(name = "purchase_date")
     private Date purchaseDate;
