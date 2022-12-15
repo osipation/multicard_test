@@ -35,12 +35,19 @@ public class ReportController {
 
         Optional<PurchaseItem> itemOptional = reportService.getMostPopularPurchaseItemForLastMonth();
         return itemOptional.map(purchaseItem -> new ResponseEntity<>(purchaseItem, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/popular/user/half-year")
     public ResponseEntity<String> getUserWithMostPurchasesForHalfYear() {
         String response = reportService.getUserWithMostPurchasesForHalfYear();
         return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    @GetMapping("/popular/item/user/age/18")
+    public ResponseEntity<PurchaseItem> getMostPopularItemAmong18YearsOld() {
+        Optional<PurchaseItem> itemOptional = reportService.getMostPopularItemAmong18YearsOld();
+        return itemOptional.map(item -> new ResponseEntity<>(item, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

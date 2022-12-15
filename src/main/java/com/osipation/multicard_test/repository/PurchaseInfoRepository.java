@@ -30,5 +30,21 @@ public interface PurchaseInfoRepository extends JpaRepository<PurchaseInfo, Inte
             "LIMIT 1)T", nativeQuery = true)
     Integer findMostPopularUserIdForHalfYear();
 
+    @Query(value = "SELECT TT.PURCHASE_ITEM " +
+            "FROM " +
+            "(SELECT T.PURCHASE_ITEM, " +
+            "SUM(T.COUNT) " +
+            "FROM " +
+            "(SELECT * " +
+            "FROM PURCHASE_INFO PI " +
+            "WHERE PI.USER_ID in " +
+            "(SELECT U.ID " +
+            "FROM USERS U " +
+            "WHERE U.AGE = 18))T " +
+            "GROUP BY T.PURCHASE_ITEM " +
+            "ORDER BY SUM DESC " +
+            "LIMIT 1)TT ", nativeQuery = true)
+    Integer findMostPopularItemAmong18YearsOld();
+
 
 }

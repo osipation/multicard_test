@@ -55,4 +55,8 @@ public class ReportService {
         return userOptional.map(user -> user.getName() + " " + user.getLastname())
                 .orElse("Такого пользователя нет");
     }
+
+    public Optional<PurchaseItem> getMostPopularItemAmong18YearsOld()  {
+        return purchaseItemRepository.findById(purchaseInfoRepository.findMostPopularItemAmong18YearsOld());
+    }
 }
