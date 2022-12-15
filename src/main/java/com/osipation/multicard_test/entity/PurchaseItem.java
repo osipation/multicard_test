@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 @Table(name = "purchases")
-public class Purchase implements Serializable {
+public class PurchaseItem implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

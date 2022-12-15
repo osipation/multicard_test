@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -25,7 +24,7 @@ public class PurchaseInfo implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "purchase_item")
-    private Purchase purchaseItem;
+    private PurchaseItem purchaseItem;
 
     @Column(name = "count")
     private int count;

@@ -1,5 +1,6 @@
 package com.osipation.multicard_test.controller;
 
+import com.osipation.multicard_test.entity.PurchaseItem;
 import com.osipation.multicard_test.entity.PurchaseInfo;
 import com.osipation.multicard_test.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/report")
@@ -22,9 +24,17 @@ public class ReportController {
         this.reportService = reportService;
     }
 
-    @GetMapping("/purchasesForWeek")
+    @GetMapping("/list/week")
     public ResponseEntity<List<PurchaseInfo>> getPurchasesForLastWeek() {
         List<PurchaseInfo> purchaseInfos = reportService.getPurchasesForLastWeek();
         return new ResponseEntity<>(purchaseInfos, HttpStatus.OK);
+    }
+
+    @GetMapping("/popular/item/month")
+    public ResponseEntity<PurchaseItem> getMostPopularPurchaseItemForLastMonth() {
+
+        Optional<PurchaseItem> itemOptional = reportService.getMostPopularPurchaseItemForLastMonth();
+        return itemOptional.map(purchaseItem -> new ResponseEntity<>(purchaseItem, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 }
